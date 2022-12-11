@@ -1,0 +1,2357 @@
+syntax = "proto3";
+
+/* enum */
+
+enum BanReason {
+    BanReason_BrBlack = 0;
+    BanReason_BrIdip = 1;
+};
+
+enum Command_Result {
+    Command_Result_CmdNoError = 0;
+    Command_Result_CmdBadRequest = 1;
+    Command_Result_CmdAuthError = 2;
+    Command_Result_CmdUserNotFound = 3;
+    Command_Result_CmdParameterError = 4;
+    Command_Result_CmdDiamondNotEnough = 5;
+};
+
+enum CostType {
+    CostType_FreshAltar = 0;
+    CostType_FreshBlackMarket = 1;
+    CostType_StoryAltar = 2;
+};
+
+enum ErrorCode {
+    ErrorCode_EcSuccess = 0;
+    ErrorCode_EcRepeatUnlockRole = 1;
+    ErrorCode_EcDiamondNotEnough = 2;
+    ErrorCode_EcRoleIdError = 3;
+    ErrorCode_EcChangeRoleNoUnlock = 4;
+    ErrorCode_EcUnlockingFull = 5;
+    ErrorCode_EcItemIdError = 6;
+    ErrorCode_EcItemIdNotInTheLocked = 7;
+    ErrorCode_EcItemIdNotInTheUnlocking = 8;
+    ErrorCode_EcRequestParamError = 9;
+    ErrorCode_EcItemNotUnlock = 10;
+    ErrorCode_EcItemAlreadyEquiped = 11;
+    ErrorCode_EcActorEquipSlotLocked = 12;
+    ErrorCode_EcKeyNotObtained = 13;
+    ErrorCode_EcKeyAlreadyUse = 14;
+    ErrorCode_EcAdsReviveLimit = 15;
+    ErrorCode_EcDiamondReviveLimit = 16;
+    ErrorCode_EcDailyCanNotBuy = 17;
+    ErrorCode_EcEventCanNotBuy = 18;
+    ErrorCode_EcItemFull = 19;
+    ErrorCode_EcCreateRoomFailed = 20;
+    ErrorCode_EcRoomNotExist = 21;
+    ErrorCode_EcJoinRoomFailed = 22;
+    ErrorCode_EcRepeatJoinRoom = 23;
+    ErrorCode_EcGetRoomInfoError = 24;
+    ErrorCode_EcAccNotExist = 25;
+    ErrorCode_EcFastEnterRoomFailed = 26;
+    ErrorCode_EcCancelFastFaield = 27;
+    ErrorCode_EcGetOrderLimit = 28;
+    ErrorCode_EcGetOrderFailed = 29;
+    ErrorCode_EcNotInTime = 30;
+    ErrorCode_EcSystemError = 1000;
+};
+
+enum Flag {
+    Flag_GuideOver = 0;
+    Flag_GuideAccessory = 1;
+    Flag_GuideAccessoryViewequip = 2;
+    Flag_GuideAccessoryViewunlock = 3;
+    Flag_BuyFreeRevive = 101;
+    Flag_BuyFreeTalkAltar = 102;
+    Flag_BuyFreeTalkBlckmarket = 103;
+    Flag_GuideHideRoom = 104;
+    Flag_GuideStory = 105;
+    Flag_GuideSkill = 106;
+    Flag_GuideSkillRepice = 107;
+    Flag_GuideSkillEquip = 108;
+    Flag_GuideMagicStone = 109;
+    Flag_DailyRewardAdd = 110;
+    Flag_PullNewMulti = 111;
+    Flag_RemoveAds = 112;
+};
+
+enum GameMode {
+    GameMode_Roguelike = 0;
+    GameMode_Story = 1;
+};
+
+enum HeartBeatType {
+    HeartBeatType_ToClient = 0;
+    HeartBeatType_ToServer = 1;
+};
+
+enum IDIPType {
+    IDIPType_Remind = 0;
+    IDIPType_Ban = 1;
+    IDIPType_ForceVerify = 2;
+};
+
+enum LivenessTaskStatus {
+    LivenessTaskStatus_UnFinish = 0;
+    LivenessTaskStatus_Finish = 1;
+    LivenessTaskStatus_GainReward = 2;
+};
+
+enum LockStepType {
+    LockStepType_NoneType = 0;
+    LockStepType_C2CmoveState = 110;
+    LockStepType_C2CmoveDirect = 111;
+    LockStepType_C2Cattack = 120;
+    LockStepType_C2CattackDirect = 121;
+    LockStepType_C2CstopAttack = 122;
+    LockStepType_C2CprocessEvent = 131;
+    LockStepType_C2CreplaceElement = 132;
+    LockStepType_C2Crevive = 141;
+    LockStepType_C2CreviveGiveUp = 142;
+    LockStepType_C2CreadyToNext = 151;
+    LockStepType_C2CuseItem = 161;
+    LockStepType_C2CpressSkill = 171;
+    LockStepType_C2CfreshBlackMarket = 181;
+    LockStepType_C2CfaceToFace = 191;
+    LockStepType_S2CplayerLeave = 901;
+    LockStepType_S2CplayerOutLine = 902;
+    LockStepType_S2CplayerOnLine = 903;
+    LockStepType_S2CkickPlayer = 904;
+    LockStepType_GmkillMonster = 9001;
+    LockStepType_GmdropElement = 9002;
+    LockStepType_GmdropItem = 9003;
+    LockStepType_GmdropDecoration = 9004;
+    LockStepType_GmdropCoin = 9005;
+    LockStepType_GmdropSkillRecipe = 9006;
+};
+
+enum LockType {
+    LockType_Locked = 0;
+    LockType_Unlocked = 1;
+};
+
+enum Mail_Flag {
+    Mail_Flag_MailNew = 0;
+    Mail_Flag_MailRead = 1;
+    Mail_Flag_MailDel = 2;
+};
+
+enum Mail_Type {
+    Mail_Type_MailAll = 0;
+    Mail_Type_MailComm = 1;
+    Mail_Type_MailReward = 2;
+    Mail_Type_MailIdip = 3;
+};
+
+enum MsgHead {
+    MsgHead_MsgIdNull = 0;
+    MsgHead_MsgIdC2SLogin = 1;
+    MsgHead_MsgIdS2CLogin = 2;
+    MsgHead_MsgIdC2SHeartBeat = 3;
+    MsgHead_MsgIdS2CHeartBeat = 4;
+    MsgHead_MsgIdC2SAddflag = 5;
+    MsgHead_MsgIdS2CAddflag = 6;
+    MsgHead_MsgIdC2SUnlockrole = 7;
+    MsgHead_MsgIdS2CUnlockrole = 8;
+    MsgHead_MsgIdC2SChangerole = 9;
+    MsgHead_MsgIdS2CChangerole = 10;
+    MsgHead_MsgIdC2SGetitem = 11;
+    MsgHead_MsgIdS2CGetitem = 12;
+    MsgHead_MsgIdC2SUnlockingitem = 13;
+    MsgHead_MsgIdS2CUnlockingitem = 14;
+    MsgHead_MsgIdC2SUnlockeditem = 15;
+    MsgHead_MsgIdS2CUnlockeditem = 16;
+    MsgHead_MsgIdC2SUnlockequipSlot = 17;
+    MsgHead_MsgIdS2CUnlockequipSlot = 18;
+    MsgHead_MsgIdC2SEquipitem = 19;
+    MsgHead_MsgIdS2CEquipitem = 20;
+    MsgHead_MsgIdC2SGetkey = 21;
+    MsgHead_MsgIdS2CGetkey = 22;
+    MsgHead_MsgIdC2SUsekey = 23;
+    MsgHead_MsgIdS2CUsekey = 24;
+    MsgHead_MsgIdC2SRevive = 25;
+    MsgHead_MsgIdS2CRevive = 26;
+    MsgHead_MsgIdC2SShopBuy = 27;
+    MsgHead_MsgIdS2CShopBuy = 28;
+    MsgHead_MsgIdC2SMailRead = 29;
+    MsgHead_MsgIdS2CMailRead = 30;
+    MsgHead_MsgIdC2SRewardDiamond = 31;
+    MsgHead_MsgIdS2CRewardDiamond = 32;
+    MsgHead_MsgIdC2SCostdiamond = 33;
+    MsgHead_MsgIdS2CCostdiamond = 34;
+    MsgHead_MsgIdC2SMailGetattachment = 35;
+    MsgHead_MsgIdS2CMailGetattachment = 36;
+    MsgHead_MsgIdC2SStoryPieces = 37;
+    MsgHead_MsgIdS2CStoryPieces = 38;
+    MsgHead_MsgIdC2SRemoveStory = 39;
+    MsgHead_MsgIdS2CRemoveStory = 40;
+    MsgHead_MsgIdC2SComposeSkill = 41;
+    MsgHead_MsgIdS2CComposeSkill = 42;
+    MsgHead_MsgIdC2SEquipSkill = 43;
+    MsgHead_MsgIdS2CEquipSkill = 44;
+    MsgHead_MsgIdC2SChangeDress = 45;
+    MsgHead_MsgIdS2CChangeDress = 46;
+    MsgHead_MsgIdC2SShowMonsterkill = 47;
+    MsgHead_MsgIdS2CShowMonsterkill = 48;
+    MsgHead_MsgIdC2SStoryReward = 49;
+    MsgHead_MsgIdS2CStoryReward = 50;
+    MsgHead_MsgIdC2SCdkey = 51;
+    MsgHead_MsgIdS2CCdkey = 52;
+    MsgHead_MsgIdC2SCharge = 53;
+    MsgHead_MsgIdS2CCharge = 54;
+    MsgHead_MsgIdC2SDailyGoods = 55;
+    MsgHead_MsgIdS2CDailyGoods = 56;
+    MsgHead_MsgIdC2SElementSmall = 58;
+    MsgHead_MsgIdC2SGetSkillrecipe = 59;
+    MsgHead_MsgIdS2CGetSkillrecipe = 60;
+    MsgHead_MsgIdC2SGetSharesuccess = 61;
+    MsgHead_MsgIdC2SPlayerLeave = 63;
+    MsgHead_MsgIdC2SAdsUseActor = 65;
+    MsgHead_MsgIdC2SExchangeDress = 67;
+    MsgHead_MsgIdS2CExchangeDress = 68;
+    MsgHead_MsgIdC2SBless = 69;
+    MsgHead_MsgIdS2CBless = 70;
+    MsgHead_MsgIdC2SFreeDiamond = 71;
+    MsgHead_MsgIdS2CFreeDiamond = 72;
+    MsgHead_MsgIdC2SUpdateTaskValue = 73;
+    MsgHead_MsgIdS2CUpdateTaskValue = 74;
+    MsgHead_MsgIdC2SGetTaskReward = 75;
+    MsgHead_MsgIdS2CGetTaskReward = 76;
+    MsgHead_MsgIdC2SGetElementEnergy = 77;
+    MsgHead_MsgIdC2SSetStoryLevel = 78;
+    MsgHead_MsgIdC2SConsumeItem = 79;
+    MsgHead_MsgIdC2SGetStoryLevelReward = 81;
+    MsgHead_MsgIdS2CGetStoryLevelReward = 82;
+    MsgHead_MsgIdC2SSetRankData = 83;
+    MsgHead_MsgIdC2SQueryRankData = 84;
+    MsgHead_MsgIdS2CQueryRankData = 85;
+    MsgHead_MsgIdC2SAddTalentTree = 86;
+    MsgHead_MsgIdC2SResetTalentTree = 87;
+    MsgHead_MsgIdC2SGetTalentTree = 88;
+    MsgHead_MsgIdS2CTalentTreeCondition = 89;
+    MsgHead_MsgIdC2SAddTalentPoint = 90;
+    MsgHead_MsgIdS2CAddTalentPoint = 91;
+    MsgHead_MsgIdC2SQuestionGetReward = 92;
+    MsgHead_MsgIdS2CQuestionGetReward = 93;
+    MsgHead_MsgIdC2SSetQuickEmoji = 94;
+    MsgHead_MsgIdS2CSetQuickEmoji = 95;
+    MsgHead_MsgIdC2SGetEmoji = 96;
+    MsgHead_MsgIdS2CGetEmoji = 97;
+    MsgHead_MsgIdC2SChangeRevive = 98;
+    MsgHead_MsgIdS2CChangeRevive = 99;
+    MsgHead_MsgIdC2SSetNickname = 101;
+    MsgHead_MsgIdC2SSetShortinfo = 102;
+    MsgHead_MsgIdC2SSetPlayerdie = 103;
+    MsgHead_MsgIdC2SSetRoomprivate = 104;
+    MsgHead_MsgIdS2CNotifyDiamond = 151;
+    MsgHead_MsgIdS2CNotifyMailNew = 152;
+    MsgHead_MsgIdS2CNotifyBlackPlayer = 153;
+    MsgHead_MsgIdS2CNotifyWhitePlayer = 154;
+    MsgHead_MsgIdC2SNotifyHonorReward = 155;
+    MsgHead_MsgIdC2SNotifyPayGoogle = 156;
+    MsgHead_MsgIdC2SNotifyPayIos = 157;
+    MsgHead_MsgIdS2CNotifyPayResponse = 158;
+    MsgHead_MsgIdS2CNotifyNotice = 159;
+    MsgHead_MsgIdS2CNotifyNewTask = 160;
+    MsgHead_MsgIdS2CNotifyElementEnergy = 161;
+    MsgHead_MsgIdS2CNotifyQuestion = 162;
+    MsgHead_MsgIdS2CNotifyIdipRemind = 163;
+    MsgHead_MsgIdS2CNotifyIdipBan = 164;
+    MsgHead_MsgIdS2CNotifyIdipVerify = 165;
+    MsgHead_MsgIdS2CNotifyLivenessTask = 166;
+    MsgHead_MsgIdS2CNotifyDailyLivenessReward = 167;
+    MsgHead_MsgIdS2CNotifyWeeklyLivenessReward = 168;
+    MsgHead_MsgIdS2CNotifyOperation = 169;
+    MsgHead_MsgIdS2CNotifyOperationTempItem = 170;
+    MsgHead_MsgIdS2CNotifyOperationRestrictShopItem = 171;
+    MsgHead_MsgIdC2SCreateroom = 201;
+    MsgHead_MsgIdS2CCreateroom = 202;
+    MsgHead_MsgIdC2SEnterroom = 203;
+    MsgHead_MsgIdS2CEnterroom = 204;
+    MsgHead_MsgIdC2SGetroominfo = 205;
+    MsgHead_MsgIdS2CGetroominfo = 206;
+    MsgHead_MsgIdC2SKickplayer = 207;
+    MsgHead_MsgIdS2CNotifyKickplayer = 208;
+    MsgHead_MsgIdC2SAddFriend = 209;
+    MsgHead_MsgIdS2CAddFriend = 210;
+    MsgHead_MsgIdC2SRemoveFriend = 211;
+    MsgHead_MsgIdS2CRemoveFriend = 212;
+    MsgHead_MsgIdC2SInviteFriend = 213;
+    MsgHead_MsgIdS2CInviteFriend = 214;
+    MsgHead_MsgIdC2SHonorRank = 215;
+    MsgHead_MsgIdS2CHonorRank = 216;
+    MsgHead_MsgIdC2SFastenterroom = 250;
+    MsgHead_MsgIdS2CFastrnterroom = 251;
+    MsgHead_MsgIdS2CNotifyFastrnterroom = 252;
+    MsgHead_MsgIdC2SLeaveroom = 261;
+    MsgHead_MsgIdC2SGamestartrReady = 262;
+    MsgHead_MsgIdC2SGameend = 263;
+    MsgHead_MsgIdS2CNotifyEnterroom = 300;
+    MsgHead_MsgIdS2CNotifyLeaveroom = 301;
+    MsgHead_MsgIdS2CNotifyGamestartReady = 302;
+    MsgHead_MsgIdS2CNotifyGamestart = 303;
+    MsgHead_MsgIdS2CNotifyGameend = 304;
+    MsgHead_MsgIdS2CNotifyChangehost = 305;
+    MsgHead_MsgIdS2CNotifyActivity = 306;
+    MsgHead_MsgIdS2CNotifyActivityChange = 307;
+    MsgHead_MsgIdS2CNotifyCrashClient = 308;
+    MsgHead_MsgIdS2CNotifyResetTalentTicket = 309;
+    MsgHead_MsgIdC2SSynmsg = 401;
+    MsgHead_MsgIdS2CSynmsg = 402;
+    MsgHead_MsgIdC2SPvpJoinRoom = 403;
+    MsgHead_MsgIdS2CPvpJoinRoom = 404;
+    MsgHead_MsgIdC2SCancelFast = 405;
+    MsgHead_MsgIdS2CCancelFast = 406;
+    MsgHead_MsgIdC2SSetMessageToekn = 501;
+    MsgHead_MsgIdC2SSetGuideFlow = 601;
+    MsgHead_MsgIdC2SSetRoundFlow = 602;
+    MsgHead_MsgIdC2SSetRoundBeginFlow = 603;
+    MsgHead_MsgIdC2SSetAdsFlow = 604;
+    MsgHead_MsgIdC2SSetDieFlow = 605;
+    MsgHead_MsgIdC2SSetEleChangeFlow = 606;
+    MsgHead_MsgIdC2SSetBattleitemFlow = 607;
+    MsgHead_MsgIdC2SSetShareFlow = 608;
+    MsgHead_MsgIdPingCcC2S = 701;
+    MsgHead_MsgIdPingCcS2C = 702;
+    MsgHead_MsgIdPingSsS2C = 703;
+    MsgHead_MsgIdPingSsC2S = 704;
+    MsgHead_MsgIdC2SDailySignReward = 705;
+    MsgHead_MsgIdS2CDailySignReward = 706;
+    MsgHead_MsgIdC2SPayItem = 707;
+    MsgHead_MsgIdS2CPayItem = 708;
+    MsgHead_MsgIdC2SGetActivityReward = 709;
+    MsgHead_MsgIdC2SRemoveCurse = 710;
+    MsgHead_MsgIdS2CRemoveCurse = 711;
+    MsgHead_MsgIdS2CMealTicket = 712;
+    MsgHead_MsgIdS2CEleTicket = 713;
+    MsgHead_MsgIdC2STicketChangeElement = 714;
+    MsgHead_MsgIdS2CTicketChangeElement = 715;
+    MsgHead_MsgIdC2SSendLockstep = 716;
+    MsgHead_MsgIdS2CSendLockstep = 717;
+    MsgHead_MsgIdC2SRequestLockstep = 718;
+    MsgHead_MsgIdS2CResponeseLockstep = 719;
+    MsgHead_MsgIdC2SGetHwpayOrderid = 720;
+    MsgHead_MsgIdS2CGetHwpayOrderid = 721;
+    MsgHead_MsgIdC2SGetLevelReward = 722;
+    MsgHead_MsgIdS2CGetLevelReward = 723;
+    MsgHead_MsgIdS2CGetPrivilege = 724;
+    MsgHead_MsgIsC2SUdpProbe = 725;
+    MsgHead_MsgIdS2CGetFrameinfo = 726;
+    MsgHead_MsgIdC2SReturnFrameinfo = 727;
+    MsgHead_MsgIdC2SMult1Result = 728;
+    MsgHead_MsgIdC2SMult2Result = 729;
+    MsgHead_MsgIdC2SGetFriendStatus = 750;
+    MsgHead_MsgIdS2CGetFriendStatus = 751;
+    MsgHead_MsgIdC2SUpdateLivenessTaskValue = 752;
+    MsgHead_MsgIdC2SGetLivenessTaskReward = 753;
+    MsgHead_MsgIdS2CGetLivenessTaskReward = 754;
+    MsgHead_MsgIdC2SGetDailyLivenessReward = 755;
+    MsgHead_MsgIdS2CGetDailyLivenessReward = 756;
+    MsgHead_MsgIdC2SGetWeeklyLivenessTaskReward = 757;
+    MsgHead_MsgIdS2CGetWeeklyLivenessTaskReward = 758;
+    MsgHead_MsgIdC2SProcenessOperation = 759;
+    MsgHead_MsgIdS2CProcenessOperation = 760;
+    MsgHead_MsgIdS2CNotifyDisconnect = 761;
+    MsgHead_MsgIdS2CServerQueryPaytoken = 763;
+    MsgHead_MsgIdC2SServerQueryPaytokenResponse = 764;
+    MsgHead_MsgIdC2SNotifyCheatPlayer = 765;
+    MsgHead_MsgIdS2CReviveTicket = 766;
+    MsgHead_MsgIdS2CNotifyTotalLoginDay = 767;
+    MsgHead_MsgIdC2SGetOperationInfo = 768;
+    MsgHead_MsgIdS2CGetOperationInfo = 769;
+    MsgHead_MsgIdC2SGetStoryAdsReward = 770;
+    MsgHead_MsgIdS2CGetStoryAdsReward = 771;
+    MsgHead_MsgIdS2CGetActivityReward = 773;
+    MsgHead_MsgIdS2CNotifyFunnyTask = 774;
+    MsgHead_MsgIdC2SUpdateFunnyTaskValue = 775;
+    MsgHead_MsgIdC2SGetFunnyTaskReward = 776;
+    MsgHead_MsgIdS2CGetFunnyTaskReward = 777;
+    MsgHead_MsgIdC2S3V3Joinroom = 778;
+    MsgHead_MsgIdS2C3V3Joinroom = 779;
+    MsgHead_MsgIdC2S3V3Leaveroom = 780;
+    MsgHead_MsgIdS2C3V3Leaveroom = 781;
+    MsgHead_MsgIdC2S3V3Matchroom = 782;
+    MsgHead_MsgIdS2C3V3Matchroom = 783;
+    MsgHead_MsgIdC2S3V3Cancermatch = 784;
+    MsgHead_MsgIdS2C3V3Cancermatch = 785;
+    MsgHead_MsgIdC2S3V3Kickplayer = 786;
+    MsgHead_MsgIdC2SUpgradeAccessory = 790;
+    MsgHead_MsgIdS2CUpgradeAccessory = 791;
+    MsgHead_MsgIdC2SGetPackage = 792;
+    MsgHead_MsgIdS2CGetPackage = 793;
+    MsgHead_MsgIdC2SOpenPackage = 795;
+    MsgHead_MsgIdS2COpenPackage = 796;
+    MsgHead_MsgIdC2SOpenPackageSlot = 797;
+    MsgHead_MsgIdS2COpenPackageSlot = 798;
+    MsgHead_MsgIdS2CNotifyUpdateIteminfo = 799;
+    MsgHead_MsgIdC2SGetPackagePoint = 800;
+    MsgHead_MsgIdS2CGetPackagePoint = 801;
+    MsgHead_MsgIdC2SUseBottle = 802;
+    MsgHead_MsgIdS2CUseBottle = 803;
+    MsgHead_MsgIdC2SActiveteTalentTree = 804;
+    MsgHead_MsgIdS2CActiveteTalentTree = 805;
+    MsgHead_MsgIdC2SBuyTalentTreePage = 806;
+    MsgHead_MsgIdS2CBuyTalentTreePage = 807;
+    MsgHead_MsgIdC2SSelfBound = 808;
+    MsgHead_MsgIdS2CSelfBound = 809;
+    MsgHead_MsgIdC2SGetPullNewTaskReward = 810;
+    MsgHead_MsgIdS2CGetPullNewTaskReward = 811;
+    MsgHead_MsgIdC2SGetPullNewTaskStatus = 812;
+    MsgHead_MsgIdS2CGetPullNewTaskStatus = 813;
+    MsgHead_MsgIdC2SExchangeItem = 820;
+    MsgHead_MsgIdS2CExchangeItem = 821;
+    MsgHead_MsgIdC2SExchangeOptionalbox = 822;
+    MsgHead_MsgIdS2CExchangeOptionalbox = 823;
+    MsgHead_MsgIdS2CNotifyOptionalboxKeynum = 824;
+    MsgHead_MsgIdS2CNotifyTxActivityNotice = 825;
+};
+
+enum NoticeShowType {
+    NoticeShowType_LoginPre = 0;
+    NoticeShowType_EnterHome = 1;
+    NoticeShowType_Lantern = 2;
+    NoticeShowType_ForceNotice = 3;
+};
+
+enum NoticeType {
+    NoticeType_Normal = 0;
+    NoticeType_Update = 1;
+    NoticeType_StopServer = 2;
+};
+
+enum Platform {
+    Platform_None = 0;
+    Platform_TencentQqAndroid = 1;
+    Platform_TencentQqIos = 2;
+    Platform_TencentWxAndroid = 3;
+    Platform_TencentWxIos = 4;
+    Platform_TencentGuest = 5;
+    Platform_Gamecenter = 6;
+    Platform_Googleplay = 7;
+    Platform_TwAccount = 8;
+    Platform_KrAccount = 9;
+    Platform_HuaweiAccount = 10;
+    Platform_TencentApple = 11;
+    Platform_TwJapanAccount = 12;
+    Platform_Facebook = 13;
+};
+
+enum ReviveType {
+    ReviveType_Ads = 0;
+    ReviveType_Diamond = 1;
+    ReviveType_DiamondStory = 2;
+    ReviveType_Free = 3;
+    ReviveType_StoryAds = 4;
+    ReviveType_Ticket = 5;
+    ReviveType_TicketStory = 6;
+};
+
+enum RoomMode {
+    RoomMode_None = 0;
+    RoomMode_Story = 1;
+    RoomMode_Chicken = 2;
+    RoomMode_Score = 3;
+    RoomMode_Share = 4;
+};
+
+enum Srv_Room_Status {
+    Srv_Room_Status_SrvRoomStEmpty = 0;
+    Srv_Room_Status_SrvRoomStWaitForJoin = 1;
+    Srv_Room_Status_SrvRoomStStart = 2;
+    Srv_Room_Status_SrvRoomStEnd = 3;
+};
+
+enum SynType {
+    SynType_SynNone = 0;
+    SynType_EnterScene = 1;
+    SynType_CreateDropBox = 2;
+    SynType_CreateDropItem = 3;
+    SynType_DestroyItem = 4;
+    SynType_TransformSyn = 5;
+    SynType_MoveStatus = 6;
+    SynType_AttackStatus = 7;
+    SynType_AttackDirect = 8;
+    SynType_AddHp = 9;
+    SynType_CurrEnergy = 10;
+    SynType_Revive = 11;
+    SynType_DamageDie = 12;
+    SynType_ResetLevel = 14;
+    SynType_AddBuff = 15;
+    SynType_OpenDropBox = 16;
+    SynType_UseMagic = 17;
+    SynType_TriggerMagic = 18;
+    SynType_ClearMagic = 19;
+    SynType_GainAdecoration = 20;
+    SynType_AbandonAdecoration = 21;
+    SynType_Trans = 22;
+    SynType_MoveTo = 23;
+    SynType_ReduceHp = 24;
+    SynType_AiuseMagic = 25;
+    SynType_FlyTo = 26;
+    SynType_ArenaScore = 27;
+    SynType_ArenaOver = 28;
+    SynType_ChallengeResult = 29;
+    SynType_CreateMonster = 30;
+    SynType_MoveTeleport = 31;
+    SynType_RemoveMinic = 32;
+    SynType_SetImmune = 33;
+    SynType_RecieveAction = 34;
+    SynType_ConfirmActionServer = 35;
+    SynType_ConfirmAction = 36;
+    SynType_BossRoar = 37;
+    SynType_BossGainElement = 38;
+    SynType_BossDizzy = 39;
+    SynType_BossReadyFourAttack = 40;
+    SynType_BossDisappear = 41;
+    SynType_BossTurnOver = 42;
+    SynType_BossBreak = 43;
+    SynType_StoryOver = 44;
+    SynType_DeleteBuff = 45;
+    SynType_PlayerAnimation = 46;
+    SynType_ShowWeather = 47;
+    SynType_ChooseWeather = 48;
+    SynType_Stop = 49;
+    SynType_ShowDropDie = 50;
+    SynType_PlayerRetreat = 51;
+    SynType_SendReadyToNext = 52;
+    SynType_ChooseNextDoor = 53;
+    SynType_TransRequest = 54;
+    SynType_TalkBoss = 55;
+    SynType_MultPause = 56;
+    SynType_ResetPos = 57;
+    SynType_ElementLevelStren = 58;
+    SynType_ShowChickenEdge = 59;
+    SynType_DropDie = 60;
+    SynType_PlayerCheat = 61;
+    SynType_ShellBreak = 62;
+    SynType_RoomShake = 63;
+    SynType_ExpUp = 64;
+    SynType_CreateEmoji = 65;
+    SynType_CurrSkillEnergy = 66;
+};
+
+enum TaskStatus {
+    TaskStatus_Tasking = 0;
+    TaskStatus_Complete = 1;
+    TaskStatus_Get = 2;
+};
+
+enum User_Type {
+    User_Type_UtDefault = 0;
+    User_Type_UtGm = 1;
+    User_Type_UtCs = 2;
+};
+
+/* message */
+
+message ActiviteTalentTreePageRequest {
+    uint32 index = 1;
+};
+
+message ActiviteTalentTreePageResponse {
+    uint32 index = 1;
+    ErrorCode retCode = 2;
+};
+
+message ActivityChangeNotify {
+    Activity activity = 1;
+};
+
+message ActivityCtx {
+    uint32 lastGetTime = 1;
+};
+
+message ActivityMutiBattleItem {
+    uint32 id = 1;
+    uint32 count = 2;
+    uint32 lastTime = 3;
+};
+
+message ActivityMutiBattle {
+    repeated ActivityMutiBattleItem items = 1;
+};
+
+message ActivityNotify {
+    repeated Activity activitys = 1;
+};
+
+message Activity {
+    uint32 id = 1;
+    uint32 time = 2;
+    bool isComplete = 3;
+    bool isGetReward = 4;
+};
+
+message ActorAds {
+    uint32 actorId = 1;
+    uint32 adsNum = 2;
+};
+
+message ActorEquip {
+    uint32 roleId = 1;
+    repeated EquipSlot equipSlot = 2;
+};
+
+message AddFlag {
+    uint32 flag = 1;
+};
+
+message AddTalentPointRequest {
+    uint32 talentPointCount = 1;
+    uint32 talentPage = 2;
+};
+
+message AddTalentPointResponse {
+    uint32 talentHaveCount = 1;
+    uint32 talentPage = 2;
+};
+
+message AddTalentTreeRequest {
+    uint32 talentId = 1;
+    uint32 index = 2;
+};
+
+message AllTalentTreeInfo {
+    uint32 index = 1;
+    bool canUse = 2;
+    repeated TalentTree talentTreeCondition = 3;
+};
+
+message AntiAddiction {
+    uint32 lastLoginTimestamp = 1;
+    uint32 totalOnlineSec = 2;
+};
+
+message AvatarInfo {
+    uint32 actorId = 1;
+    uint32 dressId = 2;
+};
+
+message BlackPlayerNotify {
+    BanReason reason = 1;
+    uint32 time = 2;
+};
+
+message BlessItem {
+    uint32 count = 1;
+    uint32 lastTime = 2;
+};
+
+message BlessRequest {
+    uint32 blessId = 1;
+    repeated uint32 buffIds = 2;
+    bool isAds = 3;
+};
+
+message BlessResponse {
+    ErrorCode retCode = 1;
+    uint32 blessId = 2;
+    repeated uint32 buffIds = 3;
+    bool isAds = 4;
+};
+
+message BoundInfo {
+    uint32 accountId = 1;
+    bool selfBound = 2;
+    string openId = 3;
+    string nickName = 4;
+};
+
+message BuffValueNew {
+    uint32 buffId = 1;
+    uint32 buffTime = 2;
+};
+
+message BuffValue {
+    uint32 buffId = 1;
+    float buffTime = 2;
+};
+
+message BuyItemResponse {
+    ErrorCode retCode = 1;
+    uint32 shopId = 2;
+    string parameter = 3;
+    uint32 costNum = 4;
+    uint32 shopNum = 5;
+};
+
+message BuyItem {
+    uint32 shopId = 1;
+    uint32 dailyId = 2;
+};
+
+message BuyTalentTreePageReponse {
+    uint32 index = 1;
+    ErrorCode retCode = 2;
+};
+
+message BuyTalentTreePageRequest {
+    uint32 index = 1;
+};
+
+message CancelFastRequest {
+    RoomMode roomMode = 1;
+};
+
+message CancelFastResponse {
+    ErrorCode retCode = 1;
+};
+
+message CDKeyResponse {
+    uint32 retCode = 1;
+    repeated ItemInfo itemInfos = 2;
+};
+
+message CDKey {
+    string cdkey = 1;
+};
+
+message ChangeDress {
+    uint32 roleId = 1;
+    uint32 dressId = 2;
+};
+
+message ChangeReviveRequest {
+    uint32 roleId = 1;
+};
+
+message ChangeReviveResponse {
+    ErrorCode retCode = 1;
+    uint32 roleId = 2;
+};
+
+message ChangeRoleRequest {
+    uint32 roleId = 1;
+};
+
+message ChangeRoleResponse {
+    ErrorCode retCode = 1;
+    uint32 roleId = 2;
+};
+
+message ChargeSuccessResponse {
+    bool isSuccess = 1;
+};
+
+message ChargeSuccess {
+    string chargeId = 1;
+    string payToken = 2;
+};
+
+message ClientFrameInfo {
+    uint32 frameNumber = 1;
+    repeated ClientUserInfo users = 2;
+};
+
+message ClientUserInfo {
+    uint32 uid = 1;
+    uint32 posx = 2;
+    uint32 posy = 3;
+    uint32 currhp = 4;
+    uint32 currmp = 5;
+    uint32 goldNum = 6;
+    uint32 energyNum = 7;
+    uint32 element1 = 8;
+    uint32 element2 = 9;
+    uint32 element3 = 10;
+};
+
+message CMD {
+    uint32 cmdId = 1;
+    bytes cmdParameters = 2;
+    uint32 cmdResult = 3;
+    bytes userToken = 4;
+    uint32 userId = 5;
+    uint32 gameSessionKey = 6;
+};
+
+message CombineSkillRecipeResponse {
+    ErrorCode retCode = 1;
+    uint32 recipeId = 2;
+    uint32 rewardId = 3;
+    uint32 rewardNum = 4;
+};
+
+message CombineSkillRecipe {
+    uint32 recipeId = 1;
+};
+
+message ConsumeItem {
+    string id = 1;
+};
+
+message CostDiamondResponse {
+    ErrorCode retCode = 1;
+    CostType type = 2;
+    uint32 costNum = 3;
+};
+
+message CostDiamond {
+    CostType type = 1;
+    bool isAds = 2;
+};
+
+message CrashNotify {
+
+};
+
+message CreateRoomRequest {
+    RoomMode roomMode = 1;
+    bool isPrivate = 2;
+};
+
+message CreateRoomResponse {
+    ErrorCode retCode = 1;
+    RoomAddr roomAddr = 2;
+    uint32 roomId = 3;
+    RoomMode mode = 4;
+};
+
+message DailyGoodsInfo {
+    uint32 dailyId = 1;
+    uint32 shopId = 2;
+    uint32 itemNum = 3;
+    uint32 diamondNum = 4;
+    uint32 canBuy = 5;
+};
+
+message DailyLivenessRewardNotify {
+    repeated DailyLivenessReward dailyLivenessRewardList = 1;
+};
+
+message DailyLivenessReward {
+    uint32 rewardId = 1;
+    LivenessTaskStatus rewardStatus = 2;
+};
+
+message DiamondNotify {
+    uint32 diamondCharge = 1;
+    uint32 diamondReward = 2;
+};
+
+message ElementEnergyNotify {
+    uint32 elementEnergyCount = 1;
+};
+
+message ElementLevel {
+    uint32 id = 1;
+    uint32 type = 2;
+    uint32 level = 3;
+};
+
+message EleTicketResponse {
+    uint32 eleTicketNum = 1;
+};
+
+message EnterRoomNotify {
+    UserInfo userInfo = 1;
+    uint32 userId = 2;
+};
+
+message EquipItemRequest {
+    uint32 roleId = 1;
+    uint32 slot = 2;
+    uint32 itemId = 3;
+};
+
+message EquipItemResponse {
+    ErrorCode retCode = 1;
+    uint32 roleId = 2;
+    uint32 slot = 3;
+    uint32 itemId = 4;
+    uint32 replaceItemId = 5;
+};
+
+message EquipSkillRepiceResponse {
+    ErrorCode retCode = 1;
+    uint32 recipeId = 2;
+};
+
+message EquipSkillRepice {
+    uint32 recipeId = 1;
+};
+
+message EquipSlot {
+    uint32 slot = 1;
+    uint32 itemId = 2;
+    LockType lockType = 3;
+};
+
+message EventGoodsInfo {
+    uint32 shopId = 1;
+    uint32 itemNum = 2;
+    uint32 itemPrice = 3;
+    uint32 canBuy = 4;
+};
+
+message ExChangeDress {
+    uint32 dressId = 1;
+};
+
+message ExChangeItemRequest {
+    uint32 shopId = 1;
+    uint32 itemNum = 2;
+};
+
+message ExChangeItemResponse {
+    uint32 retCode = 1;
+    uint32 itemId = 2;
+    uint32 itemNum = 3;
+};
+
+message ExChangeOptionalBoxRequest {
+    uint32 bigboxId = 1;
+    uint32 littleboxId = 2;
+};
+
+message ExChangeOptionalBoxResponse {
+    uint32 retCode = 1;
+    uint32 littleboxId = 2;
+};
+
+message ExpUpEffectNew {
+    uint32 type = 1;
+    uint32 value = 2;
+};
+
+message ExpUpEffect {
+    uint32 type = 1;
+    float value = 2;
+};
+
+message FastEnterRoomNotify {
+    RoomAddr roomAddr = 1;
+};
+
+message FastEnterRoomRequest {
+    RoomMode roomMode = 1;
+};
+
+message FastEnterRoomResponse {
+    ErrorCode retCode = 1;
+    RoomMode roomMode = 2;
+};
+
+message FirstRechargeActivity {
+    bool status = 1;
+};
+
+message FreeDiamondRequest {
+
+};
+
+message FreeDiamondResponse {
+
+};
+
+message FriendAddOrDelete {
+    uint32 uid = 1;
+    Platform platForm = 2;
+    string openId = 3;
+};
+
+message FriendsNotify {
+    repeated Friend friends = 1;
+};
+
+message Friend {
+    uint32 uid = 1;
+    string userName = 2;
+    bool isFriend = 3;
+    uint32 honorLevel = 4;
+    bool isInvite = 5;
+    uint32 inviteTime = 6;
+    bool isOnline = 7;
+    uint32 roleId = 8;
+    uint32 dressId = 9;
+    string openId = 10;
+};
+
+message GameEndNotify {
+
+};
+
+message GameEndRequest {
+
+};
+
+message GameInfo {
+    uint32 userId = 1;
+    uint32 roleId = 2;
+    string nickName = 3;
+    uint32 serverTime = 4;
+    uint32 diamondCharge = 5;
+    uint32 diamondReward = 6;
+    ShortInfo shortInfo = 7;
+    bool isDead = 8;
+    repeated uint32 unlockActors = 9;
+    repeated uint32 lockItems = 10;
+    repeated uint32 unlockItems = 11;
+    repeated UnlockItem unlockingItems = 12;
+    repeated uint32 worldKeys = 13;
+    repeated uint32 usedWorldKeys = 14;
+    repeated WorldLevel worldLevels = 15;
+    repeated ActorEquip actorEquip = 16;
+    repeated MonsterKill monsterKillsTotal = 17;
+    repeated MonsterKill monsterKillsTotalPre = 18;
+    repeated uint32 flags = 19;
+    repeated uint32 dresses = 20;
+    repeated AvatarInfo dressInfo = 21;
+    repeated uint32 storyPieces = 22;
+    repeated uint32 storyGroup = 23;
+    repeated uint32 storyNew = 24;
+    repeated uint32 storyReward = 25;
+    repeated SkillPiece skillPieces = 26;
+    repeated SkillRecipe skillRecipes = 27;
+    repeated Friend friends = 28;
+    repeated Friend players = 29;
+    uint32 honorLevel = 30;
+    uint32 honorValue = 31;
+    uint32 honorValueMax = 32;
+    repeated uint32 honorRewards = 33;
+    bool isShareToday = 34;
+    uint32 shareCount = 35;
+    uint32 adsCount = 36;
+    uint32 adsAltarCount = 37;
+    repeated ActorAds actorAds = 38;
+    uint32 freeDiamondCount = 39;
+    bool isFirstCharge = 40;
+    repeated Task taskList = 41;
+    uint32 elementEnergy = 42;
+    map<uint32, BlessItem> blessInfo = 43;
+    repeated StoryLevel storyLevels = 44;
+    repeated TalentTree talentTrees = 45;
+    uint32 talentHaveCount = 46;
+    RankInfo rankInfo = 47;
+    repeated uint32 quickEmoji = 48;
+    repeated uint32 hasEmoji = 49;
+    uint32 resetTalentCount = 50;
+    uint32 changeReviveTotalCount = 51;
+    uint32 changeReviveDailyCount = 52;
+    bool isDailySignReward = 53;
+    uint32 totalDailySignRewardNum = 54;
+    uint32 continuousLoginNum = 55;
+    uint32 mealTicketNum = 56;
+    uint32 storyAdsReviveCount = 57;
+    uint32 eleTicketNum = 58;
+    repeated PrivilegeInfo privilegeInfo = 59;
+    uint32 dailyLiveness = 60;
+    uint32 weeklyLiveness = 61;
+    repeated LivenessTask livenessTaskList = 62;
+    repeated DailyLivenessReward dailyLivenessRewardList = 63;
+    WeeklyLivenessReward weeklyReward = 64;
+    uint32 goingOperationId = 65;
+    repeated ItemInfo operationTempItems = 66;
+    repeated RestrictShopItemInfo operationRestrictShopItems = 67;
+    uint32 reviveTicket = 68;
+    uint32 totalLoginDay = 69;
+    uint32 canrewardOpera = 70;
+    uint32 daylimitOpera = 71;
+    uint32 storyRewardAdsCount = 72;
+    repeated Task funnyTaskList = 73;
+    repeated ItemInfo tempItems = 74;
+    map<uint32, uint32> accessoryLevelInfo = 75;
+    repeated PackageSlot packageList = 76;
+    PackagePointInfo pointInfo = 77;
+    uint32 equipTalentPage = 78;
+    repeated AllTalentTreeInfo allTalentTreeInfos = 79;
+    uint32 backSignTotalRewardNum = 80;
+    uint32 backTotalLoginDay = 81;
+    uint32 userType = 82;
+    BoundInfo boundPlayer = 83;
+    repeated string pullNewOpenId = 84;
+    repeated Task pullNewTasks = 85;
+    uint32 bodyKingTotalLogin = 86;
+    bool haveGetBodyReward = 87;
+    uint32 resetTicketNum = 88;
+    uint32 optionalboxKeyNum = 89;
+};
+
+message GameStartNotify {
+    uint32 hostId = 1;
+};
+
+message GameStartReadyNotify {
+    RoomInfo roomInfo = 1;
+};
+
+message GameStartReadyRequest {
+
+};
+
+message GetActivityRewardRequest {
+    uint32 activityId = 1;
+};
+
+message GetActivityRewardResponse {
+    uint32 retCode = 1;
+    uint32 activityId = 2;
+};
+
+message GetDailyGoodsResponse {
+    ErrorCode retCode = 1;
+    repeated DailyGoodsInfo dailyItems = 2;
+    repeated EventGoodsInfo eventItems = 3;
+    uint32 dailyRemainTime = 4;
+    uint32 limitRemainTime = 5;
+};
+
+message GetDailyGoods {
+
+};
+
+message GetDailyLivenessRewardRequest {
+    uint32 rewardId = 1;
+};
+
+message GetDailyLivenessRewardResponse {
+    uint32 retCode = 1;
+    uint32 rewardId = 2;
+};
+
+message GetDailySignRewardResponse {
+    uint32 retCode = 1;
+    uint32 rewardDay = 2;
+    uint32 type = 3;
+    uint32 rewardId = 4;
+    uint32 rewardNum = 5;
+};
+
+message GetDailySignReward {
+    uint32 type = 1;
+};
+
+message GetDiamond {
+    uint32 diamondNum = 1;
+};
+
+message GetElementEnergy {
+    uint32 itemCount = 1;
+};
+
+message GetElementSmall {
+    repeated ItemInfo itemInfos = 1;
+    uint32 killBossCount = 2;
+};
+
+message GetEmojiRequest {
+    uint32 emojiId = 1;
+};
+
+message GetEmojiResponse {
+    ErrorCode retCode = 1;
+    uint32 emojiId = 2;
+};
+
+message GetFriendStatusRequest {
+
+};
+
+message GetFriendStatusResponse {
+    repeated Friend players = 1;
+    repeated Friend friends = 2;
+};
+
+message GetFunnyTaskRewardRequest {
+    uint32 taskId = 1;
+};
+
+message GetFunnyTaskRewardResponse {
+    uint32 retCode = 1;
+    uint32 taskId = 2;
+};
+
+message GetHonorByRankResponse {
+    uint32 honorValue = 1;
+};
+
+message GetHonorByRank {
+    uint32 rank = 1;
+};
+
+message GetHWPayOrderIdRequest {
+    uint32 shopId = 1;
+};
+
+message GetHWPayOrderIdResponse {
+    ErrorCode retCode = 1;
+    uint32 shopId = 2;
+    string orderId = 3;
+};
+
+message GetItemRequest {
+    uint32 itemId = 1;
+    LockType lockType = 2;
+};
+
+message GetItemResponse {
+    ErrorCode retCode = 1;
+    uint32 itemId = 2;
+    LockType lockType = 3;
+};
+
+message GetKeyRequest {
+    uint32 keyId = 1;
+};
+
+message GetKeyResponse {
+    ErrorCode retCode = 1;
+    uint32 keyId = 2;
+};
+
+message GetLevelRewardRequest {
+    uint32 rewardId = 1;
+    bool isDiamond = 2;
+};
+
+message GetLevelRewardResponse {
+    ErrorCode retCode = 1;
+    uint32 rewardId = 2;
+};
+
+message GetLivenessTaskRewardRequest {
+    uint32 taskId = 1;
+};
+
+message GetLivenessTaskRewardResponse {
+    uint32 retCode = 1;
+    uint32 taskId = 2;
+};
+
+message GetMailAttachmentResponse {
+    uint32 retCode = 1;
+    uint32 mailId = 2;
+};
+
+message GetMailAttachment {
+    uint32 mailId = 1;
+};
+
+message GetNewTaskNotify {
+    Task newTask = 1;
+};
+
+message GetNoticeResponse {
+    uint32 retCode = 1;
+    NoticeShowType showType = 2;
+    NoticeType noticeType = 3;
+    repeated string content = 4;
+    uint32 version = 5;
+};
+
+message GetNotice {
+    NoticeShowType type = 1;
+};
+
+message GetOperationInfoRequest {
+
+};
+
+message GetOperationInfoResponse {
+    uint32 canGetReward = 1;
+    uint32 dailyGetNum = 2;
+};
+
+message GetPackagePointRequest {
+
+};
+
+message GetPackagePointResponse {
+    PackagePointInfo pointInfo = 1;
+};
+
+message GetPackageRequest {
+    uint32 itemId = 1;
+};
+
+message GetPackageResponse {
+    repeated PackageSlot packageList = 1;
+};
+
+message GetPrivilegeResponse {
+    repeated PrivilegeInfo privilegeInfos = 1;
+};
+
+message GetPullNewTaskRewardRequest {
+    uint32 taskId = 1;
+};
+
+message GetPullNewTaskRewardResponse {
+    uint32 retCode = 1;
+    uint32 taskId = 2;
+};
+
+message GetPullNewTaskStatusRequest {
+
+};
+
+message GetPullNewTaskStatusResponse {
+    uint32 retCode = 1;
+    repeated Task pullNewTasks = 2;
+};
+
+message GetRoomInfoRequest {
+    uint32 roomId = 1;
+};
+
+message GetRoomInfoResponse {
+    ErrorCode retCode = 1;
+    RoomInfo roomInfo = 2;
+    RoomAddr roomAddr = 3;
+};
+
+message GetSkillRecipeRequest {
+    uint32 skillId = 1;
+};
+
+message GetSkillRecipeResponse {
+    ErrorCode retCode = 1;
+    uint32 skillId = 2;
+};
+
+message GetStoryAdsRewardRequest {
+
+};
+
+message GetStoryAdsRewardResponse {
+    uint32 retCode = 1;
+    uint32 rewardId = 2;
+};
+
+message GetStoryLevelRewardRequest {
+    uint32 level = 1;
+};
+
+message GetStoryLevelRewardResponse {
+    uint32 retCode = 1;
+    uint32 level = 2;
+};
+
+message GetStoryPieceResponse {
+    ErrorCode retCode = 1;
+    uint32 pieceId = 2;
+    uint32 groupId = 3;
+};
+
+message GetStoryPiece {
+    uint32 pieceId = 1;
+};
+
+message GetStoryReward {
+    uint32 storyId = 1;
+};
+
+message GetTalentTreeRequest {
+
+};
+
+message GetTaskRewardRequest {
+    uint32 taskId = 1;
+};
+
+message GetTaskRewardResponse {
+    uint32 retCode = 1;
+    uint32 taskId = 2;
+};
+
+message GetWeeklyLivenessRewardRequest {
+    uint32 rewardId = 1;
+};
+
+message GetWeeklyLivenessRewardResponse {
+    uint32 retCode = 1;
+    uint32 rewardId = 2;
+};
+
+message GooglePaySuccess {
+    string productId = 1;
+    string purchaseData = 2;
+    string dataSignature = 3;
+    string orderId = 4;
+};
+
+message GuideOver {
+    bool isOver = 1;
+};
+
+message HeartBeatRequest {
+    HeartBeatType pong = 1;
+};
+
+message HeartBeatResponse {
+    HeartBeatType ping = 1;
+};
+
+message HonorRewardNotify {
+    repeated ItemInfo items = 1;
+};
+
+message IAPPaySuccess {
+    string productId = 1;
+    string receiptData = 2;
+    string orderId = 3;
+};
+
+message IDIPBanNotify {
+    string title = 1;
+    string msg = 2;
+    string traceId = 3;
+    uint32 beginTime = 4;
+    uint32 endTime = 5;
+};
+
+message IDIPPreventVerifyNotify {
+    string title = 1;
+    string msg = 2;
+    string traceId = 3;
+    string jsonStr = 4;
+};
+
+message IDIPRemindNotify {
+    string title = 1;
+    string msg = 2;
+    string traceId = 3;
+};
+
+message InviteFriendResponse {
+    uint32 roomId = 1;
+    RoomMode roomMode = 2;
+    string userName = 3;
+    RoomAddr roomAddr = 4;
+};
+
+message InviteFriend {
+    repeated uint32 uid = 1;
+    uint32 roomId = 2;
+    RoomMode roomMode = 3;
+};
+
+message ItemInfo {
+    uint32 itemId = 1;
+    uint32 itemNum = 2;
+};
+
+message KickPlayerNotify {
+    uint32 userId = 1;
+    string nickName = 2;
+    uint32 serUserid = 3;
+};
+
+message KickPlayer {
+    uint32 userId = 1;
+};
+
+message LeaveRoomNotify {
+    uint32 userId = 1;
+    string nickName = 2;
+    uint32 serUserid = 3;
+};
+
+message LeaveRoomRequest {
+    RoomAddr roomAddr = 1;
+};
+
+message LivenessTaskNotify {
+    repeated LivenessTask livenessTaskList = 1;
+};
+
+message LivenessTask {
+    uint32 taskId = 1;
+    uint32 taskValue = 2;
+    LivenessTaskStatus taskStatus = 3;
+};
+
+message LockInfo {
+    uint32 uid = 1;
+    LockStepType type = 2;
+    repeated int32 paras = 3;
+};
+
+message LockStepInfo {
+    uint32 number = 1;
+    repeated LockInfo info = 2;
+};
+
+message LoginRequest {
+    uint32 userId = 1;
+    string token = 2;
+    string openId = 3;
+    string openKey = 4;
+    string pf = 5;
+    string pfKey = 6;
+    bool isAndroid = 7;
+    string accessToken = 8;
+    string teleComOper = 9;
+    string regChannel = 10;
+    string loginChannel = 11;
+    string network = 12;
+    string systemHardware = 13;
+    string clientVersion = 14;
+    string region = 15;
+    string sign = 16;
+    string deviceId = 17;
+    bool isAdult = 18;
+};
+
+message LoginResponse {
+    ErrorCode retCode = 1;
+    GameInfo gameInfo = 2;
+    repeated MailTitle mailTitleList = 3;
+    bool realName = 4;
+    RoomAddr roomAddr = 5;
+};
+
+message MailInfo {
+    uint32 mailId = 1;
+    string mailTitle = 2;
+    string mailContent = 3;
+    repeated ItemInfo mailItems = 4;
+    bool isRead = 5;
+    bool isAttachment = 6;
+};
+
+message MailNewNotify {
+    MailTitle mailTitle = 1;
+};
+
+message MailTitle {
+    uint32 mailId = 1;
+    string mailTitle = 2;
+    uint32 mailSendTime = 3;
+    bool isRead = 4;
+    bool isAttachment = 5;
+};
+
+message Mail {
+    uint64 mailId = 1;
+    uint32 senderId = 2;
+    uint32 receiverId = 3;
+    bytes senderName = 4;
+    bytes title = 5;
+    bytes content = 6;
+    bytes attachment = 7;
+    uint32 expiredTime = 8;
+    uint32 mailFlag = 9;
+    uint64 createTime = 10;
+    uint32 mailType = 11;
+    bytes receiverName = 13;
+    uint32 iconId = 14;
+};
+
+message Mail_SaveInfo {
+    map<uint64, uint32> mailReadList = 1;
+    map<uint64, uint32> mailDelList = 2;
+    map<uint64, uint32> mailGotList = 3;
+    uint64 lastMailUpdateTime = 4;
+};
+
+message MealTicketResponse {
+    ErrorCode retCode = 1;
+    uint32 mealTicketNum = 2;
+};
+
+message MonsterKill {
+    uint32 actorId = 1;
+    uint32 killNum = 2;
+};
+
+message Mult1Result {
+    bool passLevel = 1;
+};
+
+message Mult2Result {
+    uint32 rank = 1;
+};
+
+message NewPvpInfo {
+    uint32 roomId = 1;
+};
+
+message NewPvpJoinRoomRequest {
+    uint32 roomId = 1;
+    UserInfo userInfo = 2;
+};
+
+message NewPvpJoinRoomResponse {
+    ErrorCode retCode = 1;
+    RoomInfo roomInfo = 2;
+    uint32 userId = 3;
+};
+
+message NewPvpKickPlayerRequest {
+    uint32 roomId = 1;
+    uint32 userId = 2;
+};
+
+message NickName {
+    string nickName = 1;
+};
+
+message NotifyFunnyTask {
+    repeated Task funnyTaskList = 1;
+};
+
+message NotifyLockStepInfo {
+    repeated LockStepInfo lockStepInfos = 1;
+};
+
+message NotifyTOServerPlayerCheat {
+    uint32 uid = 1;
+    uint32 cheatType = 2;
+    uint32 cheatValue = 3;
+};
+
+message OpenPackageRequest {
+    uint32 itemSlot = 1;
+};
+
+message OpenPackageResponse {
+    uint32 retCode = 1;
+    uint32 openType = 2;
+    repeated ItemInfo rewards = 3;
+    uint32 itemId = 4;
+    uint32 itemSlot = 5;
+};
+
+message OpenPackageSlotRequest {
+    uint32 slot = 1;
+};
+
+message OpenPackageSlotResponse {
+    uint32 retCode = 1;
+    uint32 slot = 2;
+};
+
+message OperationNotify {
+    uint32 operationId = 1;
+};
+
+message OperationRestrictShopItemNotify {
+    repeated RestrictShopItemInfo restrictShopItems = 1;
+};
+
+message OperationTempItemNotify {
+    repeated ItemInfo tempItem = 1;
+};
+
+message PackagePointInfo {
+    uint32 totalPoint = 1;
+    uint32 lastTime = 2;
+};
+
+message PackageSlot {
+    uint32 slot = 1;
+    bool isOpen = 2;
+    uint32 itemId = 3;
+};
+
+message Packet {
+    MsgHead msgType = 1;
+    bytes body = 2;
+};
+
+message PayItemRequest {
+    string param1 = 1;
+    string param2 = 2;
+    string payToken = 3;
+};
+
+message PayItemResponse {
+    string param1 = 1;
+    string param2 = 2;
+};
+
+message PaySuccessResponse {
+    string orderId = 1;
+    bool isSuccess = 2;
+    string productId = 3;
+};
+
+message PingRequset {
+    float time = 1;
+    int64 serverTime = 2;
+};
+
+message PingResponse {
+    float time = 1;
+    int64 serverTime = 2;
+};
+
+message PlayerDie {
+    bool isDead = 1;
+};
+
+message PlayerLeave {
+
+};
+
+message PrivilegeInfo {
+    uint32 buffId = 1;
+    uint32 endTime = 2;
+};
+
+message ProcessOperationRequest {
+    uint32 ruleId = 1;
+    uint32 ruleValue = 2;
+    uint32 multiPower = 3;
+};
+
+message ProcessOperationResponse {
+    uint32 retCode = 1;
+    uint32 rewardId = 2;
+    uint32 rewardNum = 3;
+};
+
+message PvpJoinRoomRequeset {
+    uint32 userId = 1;
+    uint32 roomId = 2;
+    UserInfo userInfo = 3;
+    bool reconnect = 4;
+    uint32 lastNumber = 5;
+};
+
+message PvpJoinRoomResponse {
+    ErrorCode retCode = 1;
+    RoomInfo roomInfo = 2;
+    string key = 3;
+    bool isGame = 4;
+    uint32 endNumber = 5;
+};
+
+message QueryRankListRequest {
+    uint32 rankType = 1;
+};
+
+message QueryRankListResponse {
+    uint32 remainTime = 1;
+    RankInfo rankInfo = 2;
+    repeated RankInfo rankList = 3;
+    uint32 rankType = 4;
+};
+
+message QuestionAlreadyGet {
+    repeated uint32 alreadygetid = 1;
+    uint64 totaltime = 2;
+    uint32 oneChallengeCount = 3;
+    uint32 manyChallengeCount = 4;
+    uint32 manyFightCount = 5;
+    repeated uint32 alrfinish = 6;
+};
+
+message QuestionGetRewardRequest {
+    uint32 id = 1;
+};
+
+message QuestionGetRewardResponse {
+    uint32 retCode = 1;
+    uint32 id = 2;
+    uint32 rewardId = 3;
+    uint32 rewardNum = 4;
+};
+
+message QuestionInfo {
+    uint32 id = 1;
+    string url = 2;
+};
+
+message RankInfo {
+    uint32 uid = 1;
+    string userName = 2;
+    uint32 rank = 3;
+    uint32 level = 4;
+    uint32 time = 5;
+    uint32 dressId = 6;
+    repeated uint32 equips = 7;
+    uint32 keyNum = 8;
+    uint32 honorLevel = 9;
+    uint32 talentLevel = 10;
+    uint32 killEnemynum = 11;
+    repeated uint32 killBoss = 12;
+};
+
+message ReadMailResponse {
+    MailInfo mailInfo = 1;
+};
+
+message ReadMail {
+    uint32 mailId = 1;
+};
+
+message RemoveCurseRequest {
+
+};
+
+message RemoveCurseResponse {
+    ErrorCode retCode = 1;
+};
+
+message RemoveNewStory {
+    uint32 storyId = 1;
+};
+
+message RequsetLockStepInfo {
+    uint32 number = 1;
+};
+
+message ResetHostNotify {
+    uint32 hostId = 1;
+};
+
+message ResetTalentTicketResponse {
+    ErrorCode retCode = 1;
+    uint32 resetTicketNum = 2;
+};
+
+message ResetTalentTreeRequest {
+    uint32 index = 1;
+    uint32 resetType = 2;
+};
+
+message ResponseLockStepInfo {
+    repeated LockStepInfo lockStepInfos = 1;
+};
+
+message RestrictShopItemInfo {
+    uint32 itemId = 1;
+    uint32 remainCount = 2;
+    uint32 allcount = 3;
+};
+
+message ReviveRequest {
+    ReviveType reviveType = 1;
+    uint32 uid = 2;
+};
+
+message ReviveResponse {
+    ErrorCode retCode = 1;
+    ReviveType reviveType = 2;
+    uint32 uid = 3;
+    uint32 costNum = 4;
+};
+
+message ReviveTicketResponse {
+    ErrorCode retCode = 1;
+    uint32 reviveTicketNum = 2;
+};
+
+message RoomAddr {
+    int32 roomServerId = 1;
+    uint32 roomId = 2;
+    string roomIp = 3;
+    int32 roomPort = 4;
+};
+
+message RoomInfo {
+    uint32 roomId = 1;
+    string roomCode = 2;
+    RoomMode roomMode = 3;
+    uint32 hostId = 4;
+    repeated UserInfo userInfos = 5;
+    bool isPrivate = 6;
+    bool isSystem = 7;
+    uint32 startTime = 8;
+    uint32 randomCode = 9;
+};
+
+message SelfBoundRequest {
+
+};
+
+message SelfBoundResponse {
+    ErrorCode retCode = 1;
+};
+
+message SendLockStepInfo {
+    string key = 1;
+    LockInfo info = 2;
+};
+
+message ServerNotifyDisConnect {
+    uint32 reason = 1;
+};
+
+message ServerQueryPayTokenResponse {
+    string payToken = 1;
+};
+
+message ServerQueryPayToken {
+
+};
+
+message ServerRequireFrameInfo {
+    uint32 frameNumber = 1;
+};
+
+message SetAdsFlow {
+    uint32 scene = 1;
+    uint32 isClick = 2;
+};
+
+message SetBattleItemFlow {
+    uint32 scene = 1;
+    uint32 itemType = 2;
+    uint32 count = 3;
+    uint32 addOrDec = 4;
+    uint32 afterCount = 5;
+    uint32 costType = 6;
+    uint32 costCount = 7;
+    uint32 itemId = 8;
+};
+
+message SetDieFlow {
+    uint32 reason = 1;
+    uint32 layer = 2;
+    uint32 isRevive = 3;
+    uint32 battleType = 4;
+};
+
+message SetEleChangeFlow {
+    uint32 scene = 1;
+    uint32 costType = 2;
+    uint32 costCount = 3;
+    uint32 oldEle1 = 4;
+    uint32 oldEle2 = 5;
+    uint32 oldEle3 = 6;
+    uint32 oldEleLevel = 7;
+    uint32 oldThreeSkill = 8;
+    uint32 newEle1 = 9;
+    uint32 newEle2 = 10;
+    uint32 newEle3 = 11;
+    uint32 newEleLevel = 12;
+    uint32 newThreeSkill = 13;
+};
+
+message SetGuideFlow {
+    uint32 guideId = 1;
+};
+
+message SetMessageToken {
+    string token = 1;
+};
+
+message SetQuickEmojiReponse {
+    ErrorCode retCode = 1;
+    repeated uint32 emojiIds = 2;
+};
+
+message SetQuickEmojiRequest {
+    repeated uint32 emojiIds = 1;
+};
+
+message SetRankData {
+    RankInfo rankInfo = 1;
+    uint32 rankType = 2;
+};
+
+message SetRoomPrivate {
+    bool isPrivate = 1;
+};
+
+message SetRoundBeginFlow {
+    uint32 roleId = 1;
+    uint32 initEle1 = 2;
+    uint32 initEle2 = 3;
+    uint32 initEle3 = 4;
+    uint32 initItem1 = 5;
+    uint32 initItem2 = 6;
+    uint32 initItem3 = 7;
+    uint32 initItem4 = 8;
+    uint32 initItem5 = 9;
+    uint32 battleType = 10;
+    uint32 layer = 11;
+};
+
+message SetRoundFlow {
+    uint32 battleId = 1;
+    uint32 battleType = 2;
+    uint32 roundScore = 3;
+    uint32 roundTime = 4;
+    uint32 result = 5;
+    uint32 rank = 6;
+    uint32 gold = 7;
+    uint32 survivalTime = 8;
+    uint32 failedReason = 9;
+    uint32 getEle = 10;
+    uint32 layer = 11;
+    uint32 killCount = 12;
+    string getTreasure = 13;
+    uint32 getGold = 14;
+    string getItem = 15;
+    uint32 revivalCount = 16;
+    uint32 eleLevel = 17;
+    string selectBuf = 18;
+};
+
+message SetShareFlow {
+    uint32 shareTo = 1;
+    string shareScene = 2;
+    uint32 shareContent = 3;
+};
+
+message SetShortInfoRequest {
+    ShortInfo shortInfo = 1;
+    uint32 type = 2;
+};
+
+message SetStoryLevel {
+    uint32 level = 1;
+    uint32 passLevel = 2;
+};
+
+message ShareToFriend {
+
+};
+
+message ShortInfo {
+    uint32 goldCoin = 1;
+    uint32 fencheng = 2;
+    uint32 roleHp = 3;
+    uint32 surviveTime = 4;
+    uint32 reviveByAds = 5;
+    uint32 reviveByDiamond = 6;
+    uint32 worldBossAppearRate = 7;
+    uint32 level = 8;
+    uint32 worldLevel = 9;
+    uint32 world = 10;
+    repeated uint32 worlds = 11;
+    uint32 currLevelType = 12;
+    repeated uint32 levelType = 13;
+    uint32 itemId = 14;
+    uint32 itemNum = 15;
+    repeated uint32 accessorys = 16;
+    repeated uint32 lockItems = 17;
+    repeated uint32 elements = 18;
+    repeated ElementLevel elementLevels = 19;
+    repeated MonsterKill monsterKills = 20;
+    repeated MonsterKill monsterKillsLevel = 21;
+    uint32 blackShopCount = 22;
+    uint32 altarShopCount = 23;
+    uint32 blackHitCount = 24;
+    float elementLevelDamageRate = 25;
+    float elementLevelSpRate = 26;
+    float elementLevelHpRate = 27;
+    repeated uint32 skillRecipes = 28;
+    repeated ItemInfo elementBalls = 29;
+    repeated BuffValue buffs = 30;
+    repeated uint32 blessBuffIds = 31;
+    uint32 elementLevel = 32;
+    uint32 elementEnergy = 33;
+    GameMode gameMode = 34;
+    uint32 totalExp = 35;
+    repeated ExpUpEffect expUpEffects = 36;
+    uint32 reviveByFree = 37;
+    repeated ExpUpEffectNew expUpEffectsNew = 38;
+    uint32 levelDamageRate = 39;
+    uint32 levelSpRate = 40;
+    uint32 levelHpRate = 41;
+    repeated BuffValueNew buffsNew = 42;
+    uint32 goldCoinTotal = 43;
+    bool isPackageRoom = 44;
+    repeated uint32 packages = 45;
+};
+
+message ShowMonsterKillResponse {
+
+};
+
+message ShowMonsterKill {
+
+};
+
+message SkillPiece {
+    uint32 element = 1;
+    uint32 num = 2;
+};
+
+message SkillRecipe {
+    uint32 id = 1;
+    bool isCompose = 2;
+    bool isEquip = 3;
+    bool isNew = 4;
+};
+
+message SQuestionInfo {
+    uint32 initTime = 1;
+    uint32 curQuestionId = 2;
+    repeated uint32 alreadyGetQuestionIds = 3;
+    bool battle = 4;
+    uint32 pveCount = 5;
+    uint32 pvpCount = 6;
+};
+
+message SrvRoomExInfo {
+    map<uint32, UserInfoEx> roomMembers = 1;
+};
+
+message SrvRoomInfo {
+    uint32 roomId = 1;
+    Srv_Room_Status roomStatus = 2;
+    uint32 createId = 3;
+    uint64 createTime = 5;
+    uint64 closeTime = 6;
+    bool isPrivate = 7;
+    bool isSystem = 8;
+    SrvRoomExInfo roomExInfo = 9;
+    string roomCode = 10;
+    RoomMode roomMode = 11;
+};
+
+message StoryLevel {
+    uint32 level = 1;
+    uint32 maxPassLevel = 2;
+    bool isPass = 3;
+    bool getReward = 4;
+};
+
+message SynRequest {
+    uint32 roomId = 1;
+    uint32 userId = 2;
+    SynType synType = 3;
+    bytes contents = 4;
+};
+
+message TalentTreeConditionResponse {
+    repeated TalentTree talentTrees = 1;
+    uint32 talentHaveCount = 2;
+    bool canHaveNextPoint = 3;
+    uint32 resetTalentCount = 4;
+};
+
+message TalentTree {
+    uint32 talentId = 1;
+    uint32 talentLevel = 2;
+};
+
+message Task {
+    uint32 taskId = 1;
+    uint32 taskValue = 2;
+    TaskStatus taskStatus = 3;
+};
+
+message TicketChangeElementRequest {
+    repeated uint32 elementIds = 1;
+};
+
+message TicketChangeElementResponse {
+    ErrorCode retCode = 1;
+    repeated uint32 elementIds = 2;
+};
+
+message TotalLoginDay {
+    uint32 totalDay = 1;
+    uint32 backTotalDay = 2;
+};
+
+message TxData {
+    uint32 lastRechargeTime = 1;
+    uint32 lastRechargeAmount = 2;
+    string regChannel = 3;
+    string loginChannel = 4;
+};
+
+message UdpProbe {
+    uint32 uid = 1;
+    string key = 2;
+};
+
+message UnlockedItemRequest {
+    uint32 itemId = 1;
+    bool isAds = 2;
+};
+
+message UnlockedItemResponse {
+    ErrorCode retCode = 1;
+    uint32 itemId = 2;
+    uint32 costNum = 3;
+};
+
+message UnlockEquipSlotRequest {
+    uint32 roleId = 1;
+    uint32 slot = 2;
+    bool isAds = 3;
+};
+
+message UnlockEquipSlotResponse {
+    ErrorCode retCode = 1;
+    uint32 roleId = 2;
+    uint32 slot = 3;
+    uint32 costNum = 4;
+};
+
+message UnlockingItemRequest {
+    uint32 itemId = 1;
+};
+
+message UnlockingItemResponse {
+    ErrorCode retCode = 1;
+    UnlockItem unlockingItem = 2;
+};
+
+message UnlockItem {
+    uint32 slot = 1;
+    uint32 itemId = 2;
+    uint32 startTime = 3;
+};
+
+message UnlockRoleRequest {
+    uint32 roleId = 1;
+};
+
+message UnlockRoleResponse {
+    ErrorCode retCode = 1;
+    uint32 roleId = 2;
+    uint32 costNum = 3;
+};
+
+message UpdateFunnyTaskValue {
+    uint32 taskId = 1;
+    uint32 taskValue = 2;
+};
+
+message UpdateLivenessTaskValue {
+    uint32 taskId = 1;
+    uint32 taskValue = 2;
+};
+
+message UpdateTaskRequest {
+    uint32 taskId = 1;
+    uint32 taskValue = 2;
+};
+
+message UpdateTaskResponse {
+    Task task = 1;
+};
+
+message UpgradeAccessoryRequest {
+    uint32 itemId = 1;
+};
+
+message UpgradeAccessoryResponse {
+    uint32 retCode = 1;
+    uint32 itemId = 2;
+    uint32 itemLevel = 3;
+};
+
+message UseBottleRequest {
+    uint32 itemId = 1;
+};
+
+message UseBottleResponse {
+    uint32 retCode = 1;
+    PackagePointInfo pointInfo = 2;
+};
+
+message UseKeyRequest {
+    uint32 itemId = 1;
+};
+
+message UseKeyResponse {
+    ErrorCode retCode = 1;
+    uint32 itemId = 2;
+};
+
+message UserInfoEx {
+    UserInfo userInfo = 1;
+    uint32 gamePid = 2;
+    uint32 gameSessionKey = 3;
+};
+
+message UserInfo {
+    uint32 userId = 1;
+    uint32 roleId = 2;
+    string nickName = 3;
+    ActorEquip actorEquip = 4;
+    repeated WorldLevel worldLevels = 5;
+    repeated uint32 usedWorldKeys = 6;
+    repeated uint32 unlockItems = 7;
+    uint32 dressId = 8;
+    uint32 honorLevel = 9;
+    repeated BuffValueNew buffs = 10;
+    repeated TalentTree talentTrees = 11;
+    repeated uint32 elements = 12;
+    repeated uint32 lockItems = 13;
+    string openId = 14;
+    uint32 teamId = 15;
+    map<uint32, uint32> accessoryLevel = 16;
+};
+
+message UserOffline {
+    uint32 userId = 1;
+    uint32 userGameKey = 2;
+    bytes userToken = 3;
+};
+
+message User_Ex_Info {
+    bytes userToken = 1;
+    string webToken = 2;
+    User_Type userType = 3;
+    uint32 userOnline = 4;
+    uint64 userCreateTime = 5;
+    uint64 userLastLoginTime = 6;
+    uint32 userPayCount = 7;
+    uint64 userDailyGoodsFreshTime = 8;
+    map<uint32, DailyGoodsInfo> userDailyGoodsMap = 9;
+    map<uint32, EventGoodsInfo> userEventGoodsMap = 10;
+    uint64 userLastGetEleTime = 11;
+    uint32 userGetEleCount = 12;
+    uint64 userDailySharedTime = 13;
+    uint64 userLastLogoutTime = 14;
+    uint64 userOnlineTime = 15;
+    uint64 userTodayOnlineTime = 16;
+    uint64 userAdsVisitTime = 17;
+    uint64 userFreeDiamondTime = 18;
+    string pushToken = 19;
+    map<uint32, uint32> activities = 20;
+    uint32 activityStartTime = 21;
+    uint32 totalRecharge = 22;
+    uint32 dayRecharge = 23;
+    uint32 lastRechargeTime = 24;
+    SQuestionInfo questionInfo = 25;
+    WeekCard weekCard = 26;
+    uint32 lastChangeReviceTime = 27;
+    map<uint32, ActivityCtx> activityCtx = 28;
+    uint32 lastStoryReviveTime = 29;
+    uint64 lastAdsAltarTime = 30;
+    uint32 totalLoginNum = 31;
+    AntiAddiction anti = 32;
+    FirstRechargeActivity firstRechargeActivity = 33;
+    TxData txData = 34;
+    ActivityMutiBattle mutiBattle = 35;
+    uint32 lastDailyRefreshTime = 36;
+    uint32 lastWeekRefreshTime = 37;
+    QuestionAlreadyGet alreadyGetAllid = 38;
+    uint32 lastLoginTime = 39;
+    uint32 ischeckNeice = 40;
+    uint32 ischeckHwneice = 41;
+    uint32 deductDiamond = 42;
+    uint32 ischeckHuiyuan = 43;
+    uint32 ischeckTotalrewarday = 44;
+    uint32 txWeekTaskRefreshtime = 45;
+    map<uint32, uint32> packetNum = 46;
+    uint32 isclearHonor = 47;
+    uint32 operaStage = 48;
+    uint32 strongNoticeTime = 49;
+    uint32 strongNoticeNum = 50;
+};
+
+message WeekCard {
+    uint32 startTime = 1;
+    uint32 remainCount = 2;
+    bool first = 3;
+    uint32 lastSendTime = 4;
+};
+
+message WeeklyLivenessRewardNotify {
+    WeeklyLivenessReward weeklyReward = 1;
+};
+
+message WeeklyLivenessReward {
+    uint32 rewardId = 1;
+    LivenessTaskStatus rewardStatus = 2;
+};
+
+message WorldLevel {
+    uint32 id = 1;
+    uint32 level = 2;
+};
